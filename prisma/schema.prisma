@@ -18,9 +18,17 @@ model User {
   name     String
   email    String @unique
   password String
+  refreshToken  String 
+  role    Role 
 }
 
 model Report {
   id    Int   @id @default(autoincrement())
   price Float
+}
+
+enum Role {
+  ADMIN
+  USER
+  GUEST
 }
