@@ -18,8 +18,8 @@ model User {
   name     String
   email    String @unique
   password String
-  refreshToken  String 
   role    Role 
+  sessionId  String? @unique
 }
 
 model Report {
