@@ -5,9 +5,15 @@ import { PrismaService } from 'src/shared';
 export class UsersService {
  constructor(protected prismaService: PrismaService){} 
  
- async findOne(id: number) {
+ async findById(id: number) {
    return this.prismaService.user.findUnique({
      where: { id }
    });
+ }
+
+ async findBySessionId(sessionId: string) {
+    return this.prismaService.user.findUnique({
+      where: { sessionId }
+    });
  }
 }
