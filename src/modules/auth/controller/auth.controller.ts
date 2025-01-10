@@ -10,7 +10,6 @@ export class AuthController {
   async register(@Body() body: RegisterDTO, @Session() session: any) {
     const user = await this.authService.register({ ...body });
     session.userId = user.createUser.sessionId;
-    console.log(session);
     return user.message;
   }
 
@@ -18,7 +17,6 @@ export class AuthController {
   async login(@Body() body: LoginDTO, @Session() session: any) {
     const user = await this.authService.login({ ...body });
     session.userId = user.user.sessionId;
-    console.log(session);
     return user.message;
   }
 
@@ -26,7 +24,6 @@ export class AuthController {
   async logout(@Session() session: Record<string, any>) {
     await this.authService.logout(session.userId);
     session.userId = null;
-    console.log(session);
     return { message: 'Sign out successful' };
   }
 }
