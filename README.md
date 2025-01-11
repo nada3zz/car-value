@@ -1,3 +1,14 @@
+# Car Value
+API for estimating used car prices, user authentication, and administrative management. It is tailored for platforms focused on vehicle resale, offering a seamless experience for both users and admins.
+
+Key Features
+------------
+- Authentication: Secure user & admin authentication mechanisms.
+- Report Management: CRUD operations for managing reports.
+- Estimate Car price based on users' reports.
+- admin review reports and approves them.
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
