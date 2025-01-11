@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { LoggerMiddleWare } from './shared/middlewares/logger.middleware';
+import { CurrentUserMiddleware } from './modules/auth/middleware/current-user.middleware';
 
 @Module({
   imports: [
@@ -29,5 +30,6 @@ import { LoggerMiddleWare } from './shared/middlewares/logger.middleware';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleWare).forRoutes('*');
+    consumer.apply(CurrentUserMiddleware).forRoutes('*');
   }
 }
