@@ -20,11 +20,23 @@ model User {
   password String
   role    Role 
   sessionId  String? @unique
+  reports Report[]
+  createdAt DateTime @default(now())
 }
 
 model Report {
   id    Int   @id @default(autoincrement())
+  make String
+  model String
+  year Int
+  mileage Float
+  lng Float
+  lat Float
   price Float
+  approved Boolean  @default(false)
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 enum Role {
