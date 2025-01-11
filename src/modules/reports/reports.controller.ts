@@ -33,6 +33,18 @@ export class ReportsController {
       return await this.reportsService.getOne(parseInt(id));
     }
 
+    @Patch('/:id')
+    @UseGuards(AuthGuard)
+    async updateReport(@Param('id') id: string, @Body() body: CreateReportDto) {
+      return await this.reportsService.update(parseInt(id), body);
+    }
+
+    @Get('/:id')
+    @UseGuards(AuthGuard)
+    async deleteReport(@Param('id') id: string) {
+      return await this.reportsService.delete(parseInt(id));
+    }
+
     @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @Patch('/:id')

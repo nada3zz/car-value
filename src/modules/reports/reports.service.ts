@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../shared';
 import { CreateReportDto, GetEstimateDto } from './dtos';
 
@@ -43,6 +43,23 @@ export class ReportsService {
 
   async getOne(id: number) {
     return await this.prismaService.report.findUnique({ where: { id } });
+  }
+
+  async update(id: number, reportDto: CreateReportDto) {
+    if (!id) {
+      throw new BadRequestException('Report id is required');
+    }
+    return await this.prismaService.report.update({
+      where: { id },
+      data: reportDto,
+    });
+  }
+
+  async delete(id: number) {
+    if (!id) {
+      throw new BadRequestException('Report id is required');
+    }
+    return await this.prismaService.report.delete({ where: { id } });
   }
 
   async changeApproval(id: number, approved: boolean) {
