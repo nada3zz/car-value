@@ -2,8 +2,9 @@ import { Controller, Get, Query, Post, Body, Patch, UseGuards, Param } from '@ne
 import { ReportsService } from './reports.service';
 import { ApproveReportDto, CreateReportDto, GetEstimateDto } from './dtos';
 import { AuthGuard } from '../auth/guard/auth.guard';
-import { CurrentUser } from '../auth/decorator';
-import { User } from '@prisma/client';
+import { CurrentUser, Roles } from '../auth/decorator';
+import { Role, User } from '@prisma/client';
+import { RolesGuard } from '../auth/guard/role.guard';
 
 @Controller('reports')
 export class ReportsController {
@@ -32,6 +33,8 @@ export class ReportsController {
       return await this.reportsService.getOne(parseInt(id));
     }
 
+    @Roles(Role.ADMIN)
+    @UseGuards(RolesGuard)
     @Patch('/:id')
     @UseGuards(AuthGuard)
     async approveReport(@Param('id') id: string, @Body() body: ApproveReportDto) {
