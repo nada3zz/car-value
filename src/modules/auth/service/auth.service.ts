@@ -108,4 +108,31 @@ export class AuthService {
     };
   }
 
+  async registerAdmin(user: RegisterDTO) {
+    const findUser = await this.prismaService.user.findUnique({
+      where: { email: user.email },
+    });
+
+    if (findUser)
+      throw new BadRequestException('This email is already registered');
+
+    const password = await this.hashPassword(user.password);
+    const sessionId = this.generateSessionId();
+    const { name, email } = user;
+    const createUser = await this.prismaService.user.create({
+      data: {
+        name,
+        email,
+        password,
+        role: Role.ADMIN,
+        sessionId,
+      },
+    });
+
+    return {
+      createUser,
+      message: 'Admin registered successfully',
+    };
+  }
+
 }

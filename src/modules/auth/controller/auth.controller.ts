@@ -13,6 +13,14 @@ export class AuthController {
     return user.message;
   }
 
+  
+  @Post('/register-admin')
+  async registerAdmin(@Body() body: RegisterDTO, @Session() session: any) {
+    const user = await this.authService.registerAdmin({ ...body });
+    session.userId = user.createUser.sessionId;
+    return user.message;
+  }
+
   @Post('/login')
   async login(@Body() body: LoginDTO, @Session() session: any) {
     const user = await this.authService.login({ ...body });
