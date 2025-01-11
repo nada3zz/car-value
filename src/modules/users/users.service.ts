@@ -19,7 +19,6 @@ export class UsersService {
         name: true,
         email: true,
         role: true,
-        reports: true,
       }
     });
   }
