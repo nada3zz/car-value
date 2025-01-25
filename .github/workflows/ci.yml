@@ -19,7 +19,10 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag car-value-cicd-pipeline:latest
-    
+      run: docker build . --file Dockerfile --tag noon01/car-value-cicd-pipeline:latest
+
+    - name: List Docker images
+      run: docker images
+
     - name: Push to Dockerhub
       run: docker push noon01/car-value-cicd-pipeline:latest
