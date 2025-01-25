@@ -32,3 +32,4 @@ jobs:
 
       - name: Verify container is running
         run: sudo docker ps -a | grep car-value-container
+        
